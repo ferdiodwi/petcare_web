@@ -15,6 +15,13 @@ class Customer extends Model
         'email',
         'phone',
         'address',
+        'password',
+    ];
+
+    // Hidden attributes untuk keamanan
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
     public function orders(): HasMany

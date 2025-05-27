@@ -15,7 +15,7 @@
                 <h2 class="text-lg font-medium text-gray-900">Informasi Hewan Peliharaan</h2>
                 <button
                     @click="showForm = !showForm"
-                    class="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
+                    class="text-[#4EA757] hover:text-[#3e8a4a] text-sm font-medium"
                     x-text="showForm ? 'Sembunyikan Form' : 'Edit Informasi'">
                 </button>
             </div>
@@ -27,7 +27,7 @@
                         <select
                             wire:model="petType"
                             id="petType"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-[#4EA757] focus:border-[#4EA757] sm:text-sm rounded-md"
                         >
                             <option value="dog">Anjing</option>
                             <option value="cat">Kucing</option>
@@ -43,7 +43,7 @@
                             wire:model="petAge"
                             type="text"
                             id="petAge"
-                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            class="mt-1 focus:ring-[#4EA757] focus:border-[#4EA757] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             placeholder="Contoh: 2 tahun"
                         >
                     </div>
@@ -55,7 +55,7 @@
                         wire:model="petSymptoms"
                         id="petSymptoms"
                         rows="3"
-                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        class="mt-1 focus:ring-[#4EA757] focus:border-[#4EA757] block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         placeholder="Jelaskan gejala hewan peliharaan Anda atau kekhawatiran Anda"
                     ></textarea>
                 </div>
@@ -63,7 +63,7 @@
                 <div class="mt-6">
                     <button
                         wire:click="startNewConsultation"
-                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#4EA757] hover:bg-[#3e8a4a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4EA757]"
                     >
                         Mulai Konsultasi Baru
                     </button>
@@ -87,7 +87,7 @@
                     @else
                         @foreach($messages as $message)
                             <div class="flex {{ $message['role'] === 'user' ? 'justify-end' : 'justify-start' }}">
-                                <div class="{{ $message['role'] === 'user' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800' }} rounded-lg py-2 px-4 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl">
+                                <div class="{{ $message['role'] === 'user' ? 'bg-[#4EA757] text-white' : 'bg-gray-200 text-gray-800' }} rounded-lg py-2 px-4 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl">
                                     @if($message['role'] === 'assistant')
                                         <div class="prose prose-sm">
                                             {!! Str::of($message['content'])->markdown() !!}
@@ -95,7 +95,7 @@
                                     @else
                                         <p class="text-sm whitespace-pre-wrap">{{ $message['content'] }}</p>
                                     @endif
-                                    <p class="text-xs mt-1 {{ $message['role'] === 'user' ? 'text-indigo-200' : 'text-gray-500' }}">{{ $message['timestamp'] }}</p>
+                                    <p class="text-xs mt-1 {{ $message['role'] === 'user' ? 'text-[#c1e8c6]' : 'text-gray-500' }}">{{ $message['timestamp'] }}</p>
                                 </div>
                             </div>
                         @endforeach
@@ -123,12 +123,12 @@
                         wire:keydown.enter="sendMessage"
                         type="text"
                         placeholder="Ketik pesan Anda di sini..."
-                        class="flex-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        class="flex-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#4EA757] focus:ring-[#4EA757] sm:text-sm"
                     >
                     <button
                         wire:click="sendMessage"
                         wire:loading.attr="disabled"
-                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#4EA757] hover:bg-[#3e8a4a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4EA757]"
                     >
                         <span wire:loading.remove>Kirim</span>
                         <span wire:loading>

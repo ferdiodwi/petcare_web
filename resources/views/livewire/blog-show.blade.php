@@ -1,12 +1,12 @@
 <div class="min-h-screen bg-gray-50">
     <!-- Header Artikel -->
-    <div class="relative bg-indigo-600 overflow-hidden">
+    <div class="relative bg-[#4EA757] overflow-hidden">
         <div class="max-w-7xl mx-auto py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-3xl tracking-tight font-extrabold text-white sm:text-4xl md:text-5xl">
                     {{ $post->title }}
                 </h1>
-                <div class="mt-4 flex items-center justify-center space-x-4 text-indigo-100">
+                <div class="mt-4 flex items-center justify-center space-x-4 text-[#e8f5e9]">
                     <span>{{ $post->created_at->translatedFormat('j F Y') }}</span>
                     <span>•</span>
                     <span>{{ $post->reading_time }} menit baca</span>
@@ -24,7 +24,7 @@
             </div>
             @endif
 
-            <article class="prose prose-indigo max-w-none">
+            <article class="prose max-w-none">
                 <!-- Konten dari Rich Text Editor -->
                 <div class="content">
                     {!! $post->content !!}
@@ -34,7 +34,7 @@
             <div class="mt-12 pt-8 border-t border-gray-200">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="https://ui-avatars.com/api/?name={{ urlencode($post->author->name ?? 'Admin') }}&background=indigo&color=white" alt="">
+                        <img class="h-10 w-10 rounded-full" src="https://ui-avatars.com/api/?name={{ urlencode($post->author->name ?? 'Admin') }}&background=4EA757&color=white" alt="">
                     </div>
                     <div class="ml-4">
                         <p class="text-sm font-medium text-gray-900">
@@ -92,7 +92,7 @@
         }
 
         .content a {
-            color: #4f46e5;
+            color: #4EA757;
             text-decoration: underline;
         }
 
@@ -121,7 +121,7 @@
                         <div class="text-sm text-gray-500 mb-2">{{ $related->created_at->translatedFormat('j F Y') }}</div>
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $related->title }}</h3>
                         <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($related->excerpt ?? $related->content), 100) }}</p>
-                        <a href="{{ route('blog.show', $post->slug) }}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium">
+                        <a href="{{ route('blog.show', $post->slug) }}" class="inline-flex items-center text-[#4EA757] hover:text-[#3d8a4d] font-medium">
                             Baca selengkapnya
                         </a>
                     </div>
@@ -146,9 +146,9 @@
             <div class="mt-8 max-w-md mx-auto sm:max-w-lg lg:mt-12">
                 <form class="sm:flex">
                     <label for="email" class="sr-only">Alamat email</label>
-                    <input id="email" type="email" autocomplete="email" required class="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs rounded-md" placeholder="Masukkan email Anda">
+                    <input id="email" type="email" autocomplete="email" required class="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-[#4EA757] focus:border-[#4EA757] sm:max-w-xs rounded-md" placeholder="Masukkan email Anda">
                     <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                        <button type="submit" class="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button type="submit" class="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#4EA757] hover:bg-[#3d8a4d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4EA757]">
                             Berlangganan
                         </button>
                     </div>

@@ -3,10 +3,16 @@
 use App\Livewire\BlogPosts;
 use App\Livewire\Home;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AuthController;
+
+
+Route::get('/users', [UserController::class, 'index']);
 
 Route::get('/services', \App\Livewire\ServicesList::class)->name('services');
 Route::get('/blog', \App\Livewire\Blog::class)->name('blog');
 Route::get('/blog/{slug}', \App\Livewire\BlogShow::class)->name('blog.show');
+Route::get('/about', \App\Livewire\About::class)->name('about');
 
 // Redirect root to blog page
 Route::redirect('/', '/home');
