@@ -13,12 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -27,23 +26,31 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->required(),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
-                    ->prefix('Rp'),
+                    ->prefix('$'),
+                Forms\Components\FileUpload::make('image_path')
+                    ->image()
+                    ->directory('products')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imageEditor()
+                    ->imageCropAspectRatio('16:9')
+                    ->imageResizeTargetWidth('1920')
+                    ->imageResizeTargetHeight('1080')
+                    ->maxSize(5120) // 5MB
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->downloadable()
+                    ->previewable()
+                    ->deletable()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('stock')
                     ->required()
-                    ->numeric(),
-                Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->directory('products'),
-                Forms\Components\Toggle::make('is_active')
-                    ->required(),
+                    ->numeric()
+                    ->default(0),
             ]);
     }
 
@@ -51,37 +58,55 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('category.name')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money('IDR')
+                    ->money('USD')
                     ->sortable(),
+                Tables\Columns\ImageColumn::make('image_path')
+                    ->disk('public')
+                    ->height(60)
+                    ->width(80)
+                    ->defaultImageUrl(url('/images/placeholder.png'))
+                    ->label('Image'),
                 Tables\Columns\TextColumn::make('stock')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
+                    ->sortable()
+                    ->badge()
+                    ->color(fn (string $state): string => match (true) {
+                        $state == 0 => 'danger',
+                        $state < 10 => 'warning',
+                        default => 'success',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('category')
-                    ->relationship('category', 'name'),
-                Tables\Filters\TernaryFilter::make('is_active'),
+                Tables\Filters\Filter::make('low_stock')
+                    ->query(fn (Builder $query): Builder => $query->where('stock', '<', 10))
+                    ->label('Low Stock'),
+                Tables\Filters\Filter::make('out_of_stock')
+                    ->query(fn (Builder $query): Builder => $query->where('stock', '=', 0))
+                    ->label('Out of Stock'),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
@@ -96,6 +121,7 @@ class ProductResource extends Resource
         return [
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
+            'view' => Pages\ViewProduct::route('/{record}'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }

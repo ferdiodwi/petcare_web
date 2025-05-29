@@ -3,15 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
-use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Filament\Resources\OrderResource\RelationManagers\ItemsRelationManager; // Akan kita buat
 use App\Models\Order;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class OrderResource extends Resource
 {
@@ -19,15 +17,18 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
-    protected static ?string $navigationGroup = 'Shop';
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('customer_id')
-                    ->relationship('customer', 'name')
-                    ->required(),
+                // Forms\Components\Select::make('user_id')
+                //     ->relationship('user', 'name'), // Jika ada user
+                Forms\Components\TextInput::make('customer_name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('address')
+                    ->required()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('total_amount')
                     ->required()
                     ->numeric()
@@ -35,13 +36,20 @@ class OrderResource extends Resource
                 Forms\Components\Select::make('status')
                     ->options([
                         'pending' => 'Pending',
+                        'paid' => 'Paid',
                         'processing' => 'Processing',
+                        'shipped' => 'Shipped',
                         'completed' => 'Completed',
                         'cancelled' => 'Cancelled',
                     ])
                     ->required(),
-                Forms\Components\Textarea::make('notes')
-                    ->columnSpanFull(),
+                Forms\Components\FileUpload::make('payment_proof_path')
+                    ->label('Payment Proof')
+                    ->image()
+                    ->disk('public')
+                    ->directory('payment-proofs')
+                    ->columnSpanFull()
+                    ->disabled(fn (string $operation): bool => $operation !== 'edit'), // Hanya bisa diubah saat edit
             ]);
     }
 
@@ -49,41 +57,36 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('customer.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('total_amount')
-                    ->money('IDR')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
+                Tables\Columns\TextColumn::make('id')->sortable(),
+                // Tables\Columns\TextColumn::make('user.name')->label('User')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('customer_name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('total_amount')->money('IDR')->sortable(),
+                Tables\Columns\TextColumn::make('status')->badge()->searchable()
                     ->color(fn (string $state): string => match ($state) {
                         'pending' => 'warning',
+                        'paid' => 'success',
                         'processing' => 'info',
+                        'shipped' => 'primary',
                         'completed' => 'success',
                         'cancelled' => 'danger',
+                        default => 'gray',
                     }),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ImageColumn::make('payment_proof_path')
+                    ->label('Proof')
+                    ->disk('public')
+                    ->defaultImageUrl(url('/images/placeholder.png')), // Gambar placeholder jika null
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('status')
-                    ->options([
-                        'pending' => 'Pending',
-                        'processing' => 'Processing',
-                        'completed' => 'Completed',
-                        'cancelled' => 'Cancelled',
-                    ]),
+                //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(), // Untuk update status & bukti bayar
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -91,7 +94,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\OrderItemsRelationManager::class,
+            ItemsRelationManager::class,
         ];
     }
 
@@ -99,7 +102,8 @@ class OrderResource extends Resource
     {
         return [
             'index' => Pages\ListOrders::route('/'),
-            'create' => Pages\CreateOrder::route('/create'),
+            // 'create' => Pages\CreateOrder::route('/create'), // Order dibuat dari API
+            'view' => Pages\ViewOrder::route('/{record}'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
     }

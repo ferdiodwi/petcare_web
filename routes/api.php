@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Customer;
 
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -76,3 +79,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+
+Route::get('/products', [ProductController::class, 'index']);
+Route::post('/orders', [OrderController::class, 'store']);
