@@ -8,6 +8,7 @@ use App\Models\Customer;
 
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\API\GroomingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +117,7 @@ Route::get('/test-config', function () {
 });
 
 
+Route::apiResource('groomings', GroomingController::class);
 Route::get('/images/{filename}', [ProductController::class, 'serveImage']);
 Route::get('/debug/images', [ProductController::class, 'debugImages']);
 Route::get('/products', [ProductController::class, 'index']);
