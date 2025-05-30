@@ -20,6 +20,29 @@ use App\Http\Controllers\Api\OrderController;
 |
 */
 
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::post('/products/upload-image', [ProductController::class, 'uploadImage']);
+
+
+// PERBAIKAN: Routes untuk debugging dan testing
+Route::get('/products/debug-images', [ProductController::class, 'debugImages']);
+Route::get('/products/test-image/{filename}', [ProductController::class, 'testImage']);
+Route::post('/products/repair-storage', [ProductController::class, 'repairStorage']);
+
+
+Route::get('/test', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'API is working',
+        'timestamp' => now(),
+        'app_url' => config('app.url'),
+        'storage_path' => storage_path('app/public'),
+        'public_storage_exists' => is_link(public_path('storage')),
+    ]);
+});
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -81,5 +104,20 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
+Route::get('/test-config', function () {
+    return response()->json([
+        'app_url' => config('app.url'),
+        'storage_path' => storage_path('app/public'),
+        'public_storage_exists' => is_link(public_path('storage')),
+        'public_storage_path' => public_path('storage'),
+        'storage_link_target' => is_link(public_path('storage')) ? readlink(public_path('storage')) : null,
+        'sample_files' => array_slice(glob(storage_path('app/public/*')), 0, 5),
+    ]);
+});
+
+
+Route::get('/images/{filename}', [ProductController::class, 'serveImage']);
+Route::get('/debug/images', [ProductController::class, 'debugImages']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
+

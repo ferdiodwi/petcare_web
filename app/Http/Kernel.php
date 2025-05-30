@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\ServeImages;
 
 class Kernel extends HttpKernel
 {
@@ -20,5 +21,7 @@ class Kernel extends HttpKernel
         ],
     ];
 
-    // ... kode lainnya
+    protected $routeMiddleware = [
+        'serve.images' => ServeImages::class,
+    ];
 }
