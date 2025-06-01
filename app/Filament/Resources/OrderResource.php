@@ -3,8 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
-use App\Filament\Resources\OrderResource\RelationManagers\ItemsRelationManager; // Akan kita buat
-use App\Models\Order;
+use App\Filament\Resources\OrderResource\RelationManagers\ItemsRelationManager;
+use App\Models\Order; // Pastikan model Order di-import
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,41 +15,98 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+    // protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
+    // Biarkan navigationGroup sebagai 'Orders'
+    protected static ?string $navigationGroup = 'Orders'; // Anda bisa ganti ke 'Manajemen Pesanan' jika mau
+
+    // Label yang akan ditampilkan di navigasi untuk resource ini
+    public static function getNavigationLabel(): string
+    {
+        return 'Pesanan';
+    }
+
+    // Label singular untuk model (misal: "Edit Pesanan X")
+    public static function getModelLabel(): string
+    {
+        return 'Pesanan';
+    }
+
+    // Label plural untuk model (misal: "Daftar Pesanan")
+    public static function getPluralModelLabel(): string
+    {
+        return 'Pesanan'; // atau 'Daftar Pesanan'
+    }
+
+    /**
+     * Menampilkan badge notifikasi di item navigasi.
+     * Menghitung jumlah pesanan dengan status 'pending'.
+     */
+    public static function getNavigationBadge(): ?string
+    {
+        // Hitung jumlah pesanan dengan status 'pending'
+        // Pastikan namespace Model\Order sudah benar dan kolom status ada di tabel orders
+        $pendingOrdersCount = static::getModel()::where('status', 'pending')->count();
+
+        if ($pendingOrdersCount > 0) {
+            return (string) $pendingOrdersCount;
+        }
+
+        return null;
+    }
+
+    /**
+     * Memberikan warna pada badge notifikasi.
+     * Warna 'warning' (kuning) jika ada pesanan pending.
+     */
+    public static function getNavigationBadgeColor(): ?string
+    {
+        $pendingOrdersCount = static::getModel()::where('status', 'pending')->count();
+
+        if ($pendingOrdersCount > 0) {
+            return 'warning'; // Warna badge (bisa 'primary', 'success', 'warning', 'danger', 'info')
+        }
+
+        return null;
+    }
+
+
+    // ... (sisa kode form, table, getRelations, getPages Anda tetap sama seperti sebelumnya) ...
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                // Forms\Components\Select::make('user_id')
-                //     ->relationship('user', 'name'), // Jika ada user
                 Forms\Components\TextInput::make('customer_name')
+                    ->label('Nama Pelanggan')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('address')
+                    ->label('Alamat')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('total_amount')
+                    ->label('Total Pembayaran')
                     ->required()
                     ->numeric()
                     ->prefix('Rp'),
                 Forms\Components\Select::make('status')
+                    ->label('Status Pesanan')
                     ->options([
                         'pending' => 'Pending',
-                        'paid' => 'Paid',
-                        'processing' => 'Processing',
-                        'shipped' => 'Shipped',
-                        'completed' => 'Completed',
-                        'cancelled' => 'Cancelled',
+                        'paid' => 'Lunas',
+                        'processing' => 'Diproses',
+                        'shipped' => 'Dikirim',
+                        'completed' => 'Selesai',
+                        'cancelled' => 'Dibatalkan',
                     ])
                     ->required(),
                 Forms\Components\FileUpload::make('payment_proof_path')
-                    ->label('Payment Proof')
+                    ->label('Bukti Pembayaran')
                     ->image()
                     ->disk('public')
                     ->directory('payment-proofs')
                     ->columnSpanFull()
-                    ->disabled(fn (string $operation): bool => $operation !== 'edit'), // Hanya bisa diubah saat edit
+                    ->visible(fn (string $operation, ?Order $record): bool => $operation === 'edit' && $record?->status === 'pending'),
             ]);
     }
 
@@ -58,10 +115,10 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
-                // Tables\Columns\TextColumn::make('user.name')->label('User')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('customer_name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('total_amount')->money('IDR')->sortable(),
+                Tables\Columns\TextColumn::make('customer_name')->label('Nama Pelanggan')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('total_amount')->label('Total')->money('IDR')->sortable(),
                 Tables\Columns\TextColumn::make('status')->badge()->searchable()
+                    ->label('Status')
                     ->color(fn (string $state): string => match ($state) {
                         'pending' => 'warning',
                         'paid' => 'success',
@@ -72,17 +129,17 @@ class OrderResource extends Resource
                         default => 'gray',
                     }),
                 Tables\Columns\ImageColumn::make('payment_proof_path')
-                    ->label('Proof')
+                    ->label('Bukti Bayar')
                     ->disk('public')
-                    ->defaultImageUrl(url('/images/placeholder.png')), // Gambar placeholder jika null
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                    ->defaultImageUrl(url('/images/placeholder.png')), // Pastikan path placeholder benar
+                Tables\Columns\TextColumn::make('created_at')->label('Tanggal Order')->dateTime()->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(), // Untuk update status & bukti bayar
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -102,8 +159,7 @@ class OrderResource extends Resource
     {
         return [
             'index' => Pages\ListOrders::route('/'),
-            // 'create' => Pages\CreateOrder::route('/create'), // Order dibuat dari API
-            'view' => Pages\ViewOrder::route('/{record}'),
+            'view' => Pages\ViewOrder::route('/{record}'), // Pastikan Anda memiliki halaman ViewOrder jika rute ini ada
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
     }

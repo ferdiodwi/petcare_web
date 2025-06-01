@@ -17,25 +17,45 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    // protected static ?string $navigationIcon = 'heroicon-o-users'; // Bisa diaktifkan jika mau
 
-    protected static ?string $navigationGroup = 'Shop';
+    protected static ?string $navigationGroup = 'Akun'; // Sudah "Akun", bagus!
+
+    // Menambahkan label untuk navigasi dan model
+    public static function getNavigationLabel(): string
+    {
+        return 'Pelanggan';
+    }
+
+    public static function getModelLabel(): string
+    {
+        return 'Pelanggan';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Pelanggan'; // Atau 'Daftar Pelanggan'
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nama Pelanggan') // Label untuk field
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
+                    ->label('Email') // Label untuk field
                     ->email()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
+                    ->label('No. Telepon') // Label untuk field
                     ->tel()
                     ->required(),
                 Forms\Components\Textarea::make('address')
+                    ->label('Alamat') // Label untuk field
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -46,27 +66,40 @@ class CustomerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nama Pelanggan') // Header kolom
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->label('Email') // Header kolom
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
+                    ->label('No. Telepon') // Header kolom
                     ->searchable(),
-                    Tables\Columns\TextColumn::make('address')
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Alamat') // Header kolom
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Daftar') // Header kolom
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                // Jika ada 'updated_at' yang ingin ditampilkan:
+                // Tables\Columns\TextColumn::make('updated_at')
+                //     ->label('Diperbarui Pada')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // Tambahkan filter jika perlu, dengan label berbahasa Indonesia
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(), // Label biasanya otomatis diterjemahkan jika locale 'id'
+                // Jika tidak, ->label('Ubah')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(), // Label biasanya otomatis diterjemahkan
+                    // Jika tidak, ->label('Hapus Terpilih')
                 ]),
             ]);
     }
