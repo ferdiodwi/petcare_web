@@ -9,17 +9,8 @@ use App\Models\Customer;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\API\GroomingController;
+use App\Http\Controllers\BoardingController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
@@ -115,6 +106,17 @@ Route::get('/test-config', function () {
         'sample_files' => array_slice(glob(storage_path('app/public/*')), 0, 5),
     ]);
 });
+
+
+// Route::prefix('boardings')->group(function () {
+//     Route::get('/', [BoardingController::class, 'index']);
+//     Route::post('/', [BoardingController::class, 'store']);
+//     Route::get('/statistics', [BoardingController::class, 'statistics']);
+//     Route::get('/{boarding}', [BoardingController::class, 'show']);
+//     Route::put('/{boarding}', [BoardingController::class, 'update']);
+//     Route::delete('/{boarding}', [BoardingController::class, 'destroy']);
+//     Route::patch('/{boarding}/status', [BoardingController::class, 'updateStatus']);
+// });
 
 
 Route::apiResource('groomings', GroomingController::class);

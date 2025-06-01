@@ -9,8 +9,20 @@ class Grooming extends Model
 {
     use HasFactory;
 
-        protected $fillable = [
-            'kategori', 'harga', 'tanggal', 'jam', 'email', 'phone', 'catatan'
-        ];
+    protected $fillable = [
+        'name',        // Tambahkan field name
+        'kategori',
+        'harga',
+        'tanggal',
+        'jam',
+        'email',
+        'phone',
+        'catatan'
+    ];
 
+    // Cast attributes to proper types
+    protected $casts = [
+        'tanggal' => 'date',
+        'harga' => 'integer',
+    ];
 }
