@@ -26,7 +26,7 @@ Route::post('/products/repair-storage', [ProductController::class, 'repairStorag
 Route::get('/test', function () {
     return response()->json([
         'status' => 'success',
-        'message' => 'API is working',
+        'message' => 'Api is working',
         'timestamp' => now(),
         'app_url' => config('app.url'),
         'storage_path' => storage_path('app/public'),
