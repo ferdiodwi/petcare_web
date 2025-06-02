@@ -14,6 +14,177 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
+    /**
+     * Get all orders
+     */
+    public function index(Request $request)
+    {
+        try {
+            $query = Order::with(['items.product']);
+
+            // Filter berdasarkan customer_name jika diperlukan
+            if ($request->has('customer_name') && $request->customer_name) {
+                $query->where('customer_name', 'like', '%' . $request->customer_name . '%');
+            }
+
+            // Filter berdasarkan status jika diperlukan
+            if ($request->has('status') && $request->status) {
+                $query->where('status', $request->status);
+            }
+
+            // Urutkan berdasarkan tanggal terbaru
+            $orders = $query->orderBy('created_at', 'desc')->get();
+
+            // Transform data untuk response
+            $ordersData = $orders->map(function ($order) {
+                return [
+                    'id' => $order->id,
+                    'customer_name' => $order->customer_name,
+                    'address' => $order->address,
+                    'total_amount' => $order->total_amount,
+                    'status' => $order->status,
+                    'payment_proof_path' => $order->payment_proof_path,
+                    'created_at' => $order->created_at->toDateTimeString(),
+                    'updated_at' => $order->updated_at->toDateTimeString(),
+                    'items' => $order->items->map(function ($item) {
+                        return [
+                            'id' => $item->id,
+                            'product_id' => $item->product_id,
+                            'product_name' => $item->product->name ?? 'N/A',
+                            'quantity' => $item->quantity,
+                            'price_at_purchase' => $item->price_at_purchase,
+                        ];
+                    }),
+                ];
+            });
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Orders retrieved successfully',
+                'orders' => $ordersData
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Failed to retrieve orders:', ['error' => $e->getMessage()]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve orders',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Get single order by ID
+     */
+    public function show($id)
+    {
+        try {
+            $order = Order::with(['items.product'])->find($id);
+
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Order not found'
+                ], 404);
+            }
+
+            $orderData = [
+                'id' => $order->id,
+                'customer_name' => $order->customer_name,
+                'address' => $order->address,
+                'total_amount' => $order->total_amount,
+                'status' => $order->status,
+                'payment_proof_path' => $order->payment_proof_path,
+                'created_at' => $order->created_at->toDateTimeString(),
+                'updated_at' => $order->updated_at->toDateTimeString(),
+                'items' => $order->items->map(function ($item) {
+                    return [
+                        'id' => $item->id,
+                        'product_id' => $item->product_id,
+                        'product_name' => $item->product->name ?? 'N/A',
+                        'quantity' => $item->quantity,
+                        'price_at_purchase' => $item->price_at_purchase,
+                    ];
+                }),
+            ];
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Order retrieved successfully',
+                'order' => $orderData
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Failed to retrieve order:', ['error' => $e->getMessage(), 'order_id' => $id]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve order',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Update order status
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|string|in:pending,paid,processing,shipped,completed,canceled'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $order = Order::find($id);
+
+            if (!$order) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Order not found'
+                ], 404);
+            }
+
+            $order->update([
+                'status' => $request->status
+            ]);
+
+            Log::info('Order status updated:', [
+                'order_id' => $order->id,
+                'old_status' => $order->getOriginal('status'),
+                'new_status' => $request->status
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Order status updated successfully',
+                'order' => [
+                    'id' => $order->id,
+                    'status' => $order->status,
+                    'updated_at' => $order->updated_at->toDateTimeString()
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Failed to update order status:', [
+                'error' => $e->getMessage(),
+                'order_id' => $id
+            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update order status',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function store(Request $request)
     {
         Log::info('Order request received:', $request->all());

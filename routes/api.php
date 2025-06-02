@@ -13,7 +13,6 @@ use App\Http\Controllers\Api\CustomerProfileController;
 use App\Http\Controllers\Api\BoardingController;
 
 
-
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::post('/products/upload-image', [ProductController::class, 'uploadImage']);
@@ -137,6 +136,10 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
 Route::get('/orders/customer/{id}', [OrderController::class, 'getCustomerOrders']);
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
 
 Route::middleware(['auth:api'])->group(function () {
     // Order routes
@@ -145,4 +148,12 @@ Route::middleware(['auth:api'])->group(function () {
         Route::get('/{orderId}', [OrderController::class, 'getOrderDetails']);
         Route::put('/{orderId}/status', [OrderController::class, 'updateStatus']); // Admin only
     });
+});
+
+
+Route::prefix('orders')->group(function () {
+    Route::get('/', [OrderController::class, 'index']); // GET /api/orders - Ambil semua pesanan
+    Route::get('/{id}', [OrderController::class, 'show']); // GET /api/orders/{id} - Ambil satu pesanan
+    Route::post('/', [OrderController::class, 'store']); // POST /api/orders - Buat pesanan baru
+    Route::patch('/{id}/status', [OrderController::class, 'updateStatus']); // PATCH /api/orders/{id}/status - Update status pesanan
 });
