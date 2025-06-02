@@ -73,7 +73,7 @@
                        Consultation
                     </a>
                     <a href="{{ url('/about') }}"
-                       class="transition font-medium {{ Request::is('About') ? 'text-[#4EA757]' : 'text-gray-700 hover:text-[#4EA757]' }}">
+                       class="transition font-medium {{ Request::is('about') ? 'text-[#4EA757]' : 'text-gray-700 hover:text-[#4EA757]' }}">
                        About Us
                     </a>
                 </div>

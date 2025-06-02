@@ -1,227 +1,287 @@
-<div class="min-h-screen bg-gray-50 font-sans antialiased">
-  <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-[#4EA757] to-[#3a7e44] py-24 md:py-32">
-    <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLW9wYWNpdHk9IjAuMiI+PHBhdGggZD0iTTAgMEg0MFY0MEgweiIvPjwvc3ZnPg==');"></div>
-
-    <div class="container mx-auto px-6 text-center">
-      <h1 class="text-4xl font-bold text-white sm:text-5xl md:text-6xl">Tentang <span class="font-light">Kami</span></h1>
-      <p class="mt-6 text-lg text-[#e8f5e9]/90 max-w-3xl mx-auto">
-        Dedikasi kami terhadap kesejahteraan hewan peliharaan sejak 2010
-      </p>
-    </div>
-  </section>
-
-  <!-- Our Story -->
-  <section class="py-24 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="flex flex-col lg:flex-row items-center gap-16">
-        <div class="lg:w-1/2">
-          <div class="relative">
-            <div class="absolute -inset-4 bg-[#4EA757]/20 rounded-3xl blur-lg"></div>
-            <div class="relative overflow-hidden rounded-2xl shadow-xl">
-              <img class="w-full h-auto object-cover" src="https://images.unsplash.com/photo-1583511655826-05700442b31b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Our clinic" loading="lazy">
+<div class="min-h-screen bg-gray-50 font-sans">
+    <!-- Hero Section -->
+    <div class="relative bg-[#4EA757] overflow-hidden">
+        <div class="absolute inset-0">
+            <img class="w-full h-full object-cover opacity-20"
+                 src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+                 alt="Pet care background">
+        </div>
+        <div class="relative max-w-7xl mx-auto py-24 px-6 sm:py-32 sm:px-8 lg:px-10">
+            <div class="text-center">
+                <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                    <span class="block animate-fade-in-down">Tentang Kami</span>
+                    <span class="block text-[#e8f5e9] mt-2">Dedikasi untuk Hewan Peliharaan</span>
+                </h1>
+                <p class="mt-6 max-w-3xl text-xl text-[#e8f5e9] mx-auto">
+                    Sejak 2016, kami telah berkomitmen memberikan perawatan terbaik untuk hewan peliharaan dengan penuh kasih sayang dan profesionalisme tinggi.
+                </p>
             </div>
-          </div>
         </div>
-        <div class="lg:w-1/2">
-          <span class="text-[#4EA757] font-medium">SEJARAH KAMI</span>
-          <h2 class="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">Perjalanan <span class="text-[#4EA757]">Kami</span></h2>
-          <p class="mt-6 text-gray-600">
-            Berawal dari klinik kecil di tahun 2010, kami telah berkembang menjadi pusat perawatan hewan terkemuka dengan 5 cabang di seluruh Indonesia. Visi kami sederhana: memberikan perawatan terbaik untuk hewan peliharaan dengan standar internasional.
-          </p>
-          <div class="mt-8 grid sm:grid-cols-2 gap-8">
-            <div>
-              <div class="text-3xl font-bold text-[#4EA757]">2010</div>
-              <div class="mt-2 text-lg font-medium text-gray-900">Didirikan</div>
-              <p class="mt-2 text-gray-600">Klinik pertama kami dibuka di Jakarta Selatan</p>
+    </div>
+
+    <!-- Company Story -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl mb-6">
+                        Kisah Kami
+                    </h2>
+                    <div class="space-y-4 text-gray-600 text-lg">
+                        <p>
+                            PetCare lahir dari kecintaan mendalam terhadap hewan peliharaan. Dimulai dengan sebuah klinik kecil, kami memiliki visi sederhana namun mulia: memberikan perawatan terbaik untuk setiap hewan yang dipercayakan kepada kami.
+                        </p>
+                        <p>
+                            Dengan tim yang terdiri dari dokter hewan berpengalaman, groomer bersertifikat, dan caregiver yang penuh kasih sayang, kami telah melayani ribuan hewan peliharaan dan keluarga mereka.
+                        </p>
+                        <p>
+                            Hari ini, PetCare telah berkembang menjadi pusat layanan pet care terpercaya dengan fasilitas modern dan teknologi terdepan, namun nilai-nilai inti kami tetap sama: kasih sayang, profesionalisme, dan dedikasi.
+                        </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                         alt="Pet care story"
+                         class="w-full h-96 object-cover rounded-2xl shadow-lg">
+                    <div class="absolute -bottom-6 -right-6 bg-[#4EA757] text-white p-6 rounded-xl shadow-lg">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">8+</div>
+                            <div class="text-sm">Tahun Melayani</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-              <div class="text-3xl font-bold text-[#4EA757]">5+</div>
-              <div class="mt-2 text-lg font-medium text-gray-900">Cabang</div>
-              <p class="mt-2 text-gray-600">Kini hadir di 5 kota besar di Indonesia</p>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="py-16 bg-[#4EA757]">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    Pencapaian Kami
+                </h2>
+                <p class="mt-4 text-xl text-[#e8f5e9]">
+                    Angka-angka yang membanggakan dari perjalanan kami
+                </p>
             </div>
-          </div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($stats as $stat)
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-white/20 text-white mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $stat['icon'] }}" />
+                        </svg>
+                    </div>
+                    <div class="text-4xl font-bold text-white mb-2">{{ $stat['number'] }}</div>
+                    <div class="text-[#e8f5e9]">{{ $stat['label'] }}</div>
+                </div>
+                @endforeach
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Our Mission -->
-  <section class="py-24 bg-gray-50">
-    <div class="container mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto">
-        <span class="text-[#4EA757] font-medium">VISI & MISI</span>
-        <h2 class="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">Komitmen <span class="text-[#4EA757]">Kami</span></h2>
-      </div>
-
-      <div class="mt-16 grid md:grid-cols-2 gap-12">
-        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300">
-          <div class="w-16 h-16 bg-[#4EA757]/10 rounded-xl flex items-center justify-center">
-            <svg class="w-8 h-8 text-[#4EA757]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-          </div>
-          <h3 class="mt-6 text-xl font-semibold text-gray-900">Visi</h3>
-          <p class="mt-4 text-gray-600">
-            Menjadi pusat perawatan hewan terdepan di Asia Tenggara yang memberikan layanan holistik dengan standar internasional dan pendekatan penuh kasih sayang.
-          </p>
+    <!-- Our Values -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Nilai-Nilai Kami
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Prinsip yang memandu setiap langkah perjalanan kami
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($values as $value)
+                <div class="bg-white rounded-xl p-8 text-center hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[#4EA757] text-white mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $value['icon'] }}" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">{{ $value['title'] }}</h3>
+                    <p class="text-gray-600">{{ $value['description'] }}</p>
+                </div>
+                @endforeach
+            </div>
         </div>
+    </section>
 
-        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300">
-          <div class="w-16 h-16 bg-[#4EA757]/10 rounded-xl flex items-center justify-center">
-            <svg class="w-8 h-8 text-[#4EA757]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-            </svg>
-          </div>
-          <h3 class="mt-6 text-xl font-semibold text-gray-900">Misi</h3>
-          <ul class="mt-4 space-y-3 text-gray-600">
-            <li class="flex items-start">
-              <svg class="flex-shrink-0 w-5 h-5 text-[#4EA757] mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Menyediakan layanan medis hewan dengan teknologi terkini</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="flex-shrink-0 w-5 h-5 text-[#4EA757] mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Mengedukasi pemilik hewan tentang perawatan yang bertanggung jawab</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="flex-shrink-0 w-5 h-5 text-[#4EA757] mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Mengutamakan kesejahteraan hewan dalam setiap layanan</span>
-            </li>
-          </ul>
+    <!-- Timeline -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Perjalanan Kami
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Milestone penting dalam sejarah PetCare
+                </p>
+            </div>
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-[#4EA757]"></div>
+
+                <div class="space-y-12">
+                    @foreach($milestones as $index => $milestone)
+                    <div class="relative flex items-center {{ $index % 2 == 0 ? 'justify-start' : 'justify-end' }}">
+                        <!-- Timeline dot -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#4EA757] rounded-full border-4 border-white shadow-lg z-10"></div>
+
+                        <!-- Content -->
+                        <div class="w-5/12 {{ $index % 2 == 0 ? 'pr-8 text-right' : 'pl-8 text-left' }}">
+                            <div class="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow">
+                                <div class="text-2xl font-bold text-[#4EA757] mb-2">{{ $milestone['year'] }}</div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ $milestone['title'] }}</h3>
+                                <p class="text-gray-600">{{ $milestone['description'] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Our Team -->
-  <section class="py-24 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto">
-        <span class="text-[#4EA757] font-medium">TIM KAMI</span>
-        <h2 class="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">Kenali <span class="text-[#4EA757]">Tim Profesional</span> Kami</h2>
-        <p class="mt-4 text-lg text-gray-600">
-          Para ahli yang berdedikasi untuk kesehatan hewan peliharaan Anda
-        </p>
-      </div>
-
-      <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Team Member 1 -->
-        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-          <div class="h-64 overflow-hidden">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dr. Andi Wijaya" loading="lazy">
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-900">Dr. Andi Wijaya</h3>
-            <p class="mt-1 text-[#4EA757]">Dokter Hewan Utama</p>
-            <p class="mt-4 text-gray-600">Spesialis bedah hewan dengan pengalaman 15 tahun, lulusan Universitas Gadjah Mada.</p>
-          </div>
+    <!-- Team Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Tim Profesional Kami
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Bertemu dengan para ahli yang berdedikasi merawat hewan peliharaan Anda
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($teamMembers as $member)
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <div class="h-64 overflow-hidden">
+                        <img src="{{ $member['image'] }}"
+                             alt="{{ $member['name'] }}"
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-1">{{ $member['name'] }}</h3>
+                        <p class="text-[#4EA757] font-medium mb-2">{{ $member['position'] }}</p>
+                        <p class="text-sm text-gray-600 mb-3">{{ $member['specialization'] }}</p>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            {{ $member['experience'] }} pengalaman
+                        </div>
+                        <p class="text-gray-600 text-sm">{{ $member['description'] }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
+    </section>
 
-        <!-- Team Member 2 -->
-        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-          <div class="h-64 overflow-hidden">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dr. Siti Rahayu" loading="lazy">
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-900">Dr. Siti Rahayu</h3>
-            <p class="mt-1 text-[#4EA757]">Dokter Hewan Spesialis</p>
-            <p class="mt-4 text-gray-600">Ahli dermatologi hewan, fokus pada perawatan kulit dan bulu hewan peliharaan.</p>
-          </div>
+    <!-- Facilities -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Fasilitas Modern
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Dilengkapi dengan teknologi terdepan untuk kenyamanan hewan peliharaan
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                         alt="Medical facility"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-semibold mb-2">Ruang Medis</h3>
+                        <p class="text-sm">Dilengkapi peralatan medis modern</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                         alt="Grooming area"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-semibold mb-2">Area Grooming</h3>
+                        <p class="text-sm">Ruang grooming yang nyaman dan higienis</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                         alt="Play area"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-semibold mb-2">Area Bermain</h3>
+                        <p class="text-sm">Ruang bermain luas untuk aktivitas hewan</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                         alt="Boarding rooms"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-semibold mb-2">Kamar Boarding</h3>
+                        <p class="text-sm">Kamar ber-AC dengan tempat tidur nyaman</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1415369629372-26f2fe60c467?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                         alt="Reception area"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-semibold mb-2">Area Resepsionis</h3>
+                        <p class="text-sm">Ruang tunggu yang nyaman untuk pemilik</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1581888227599-779811939961?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                         alt="Garden area"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-semibold mb-2">Taman Outdoor</h3>
+                        <p class="text-sm">Area outdoor untuk aktivitas dan olahraga</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Team Member 3 -->
-        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-          <div class="h-64 overflow-hidden">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1562788869-4ed32648eb72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Budi Santoso" loading="lazy">
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-900">Budi Santoso</h3>
-            <p class="mt-1 text-[#4EA757]">Ahli Grooming</p>
-            <p class="mt-4 text-gray-600">Bersertifikat internasional dengan spesialisasi grooming untuk ras tertentu.</p>
-          </div>
+    <!-- CTA Section -->
+    <section class="relative bg-[#4EA757] overflow-hidden">
+        <div class="absolute inset-0">
+            <img class="w-full h-full object-cover opacity-10"
+                 src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+                 alt="Background pattern">
         </div>
-
-        <!-- Team Member 4 -->
-        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-          <div class="h-64 overflow-hidden">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dewi Lestari" loading="lazy">
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-900">Dewi Lestari</h3>
-            <p class="mt-1 text-[#4EA757]">Manajer Layanan</p>
-            <p class="mt-4 text-gray-600">Memastikan setiap hewan peliharaan mendapatkan pengalaman terbaik di klinik kami.</p>
-          </div>
+        <div class="relative max-w-7xl mx-auto py-24 px-6 sm:py-32 sm:px-8 lg:px-10">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    <span class="block">Bergabunglah dengan Keluarga PetCare</span>
+                    <span class="block mt-2 text-[#e8f5e9]">Kepercayaan Anda adalah Kehormatan Kami</span>
+                </h2>
+                <p class="mt-6 max-w-2xl text-xl text-[#e8f5e9] mx-auto">
+                    Mari bersama-sama memberikan yang terbaik untuk hewan peliharaan tercinta Anda
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="/services" class="px-8 py-4 border border-transparent text-base font-medium rounded-xl shadow-sm text-[#4EA757] bg-white hover:bg-[#f1f8f1] md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:-translate-y-1">
+                        Lihat Layanan Kami
+                    </a>
+                    <a href="/contact" class="px-8 py-4 border border-white text-base font-medium rounded-xl shadow-sm text-white bg-transparent hover:bg-white hover:bg-opacity-10 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:-translate-y-1">
+                        Hubungi Kami
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Our Facilities -->
-  <section class="py-24 bg-gray-50">
-    <div class="container mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto">
-        <span class="text-[#4EA757] font-medium">FASILITAS KAMI</span>
-        <h2 class="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">Klinik <span class="text-[#4EA757]">Modern</span> & Nyaman</h2>
-        <p class="mt-4 text-lg text-gray-600">
-          Kami menyediakan fasilitas terbaik untuk kenyamanan hewan peliharaan Anda
-        </p>
-      </div>
-
-      <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Facility 1 -->
-        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-500 h-96">
-          <img class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700" src="https://images.unsplash.com/photo-1583337130417-3346c1cd7fca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ruang Periksa" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-6 text-white">
-            <h3 class="text-xl font-bold">Ruang Periksa Modern</h3>
-            <p class="mt-2 opacity-90">Dilengkapi peralatan diagnostik terkini untuk pemeriksaan yang akurat</p>
-          </div>
-        </div>
-
-        <!-- Facility 2 -->
-        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-500 h-96">
-          <img class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700" src="https://images.unsplash.com/photo-1581888227599-779811939961?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ruang Operasi" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-6 text-white">
-            <h3 class="text-xl font-bold">Ruang Operasi Steril</h3>
-            <p class="mt-2 opacity-90">Standar ruang operasi kelas dunia dengan peralatan lengkap</p>
-          </div>
-        </div>
-
-        <!-- Facility 3 -->
-        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-500 h-96">
-          <img class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700" src="https://images.unsplash.com/photo-1594149929911-78975a43d4f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Ruang Rawat Inap" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-6 text-white">
-            <h3 class="text-xl font-bold">Ruang Rawat Inap</h3>
-            <p class="mt-2 opacity-90">Tempat istirahat nyaman dengan pengawasan 24 jam</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-24 bg-gradient-to-r from-[#4EA757] to-[#3a7e44]">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold text-white sm:text-4xl">Siap Memberikan Perawatan Terbaik</h2>
-      <p class="mt-4 text-lg text-[#e8f5e9] max-w-2xl mx-auto">
-        Jadwalkan kunjungan atau konsultasikan kebutuhan hewan peliharaan Anda dengan tim profesional kami
-      </p>
-      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-        <a href="#" class="px-8 py-3.5 bg-white text-[#4EA757] rounded-full font-medium hover:bg-gray-50 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
-          Hubungi Kami
-        </a>
-        <a href="#" class="px-8 py-3.5 border-2 border-white/30 text-white rounded-full font-medium hover:bg-white/10 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
-          Lihat Jadwal Dokter
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

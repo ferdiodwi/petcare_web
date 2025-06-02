@@ -37,78 +37,60 @@
 
     <!-- Layanan Unggulan - Diperbaiki dengan card yang lebih menarik -->
     <div class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-            <div class="text-center">
-                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                    Layanan Kami
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-                    Perawatan komprehensif untuk semua kebutuhan hewan peliharaan Anda
-                </p>
-            </div>
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                Layanan Kami
+            </h2>
+            <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                Perawatan komprehensif untuk semua kebutuhan hewan peliharaan Anda
+            </p>
+        </div>
 
-            <div class="mt-16">
-                <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                    <!-- Layanan 1 -->
-                    <div class="bg-white rounded-xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#4EA757]">
-                        <div class="flex items-center justify-center h-14 w-14 rounded-xl bg-[#4EA757] text-white shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg>
-                        </div>
-                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Perawatan Veteriner</h3>
-                        <p class="mt-4 text-base text-gray-600">
-                            Layanan medis profesional untuk perawatan preventif dan pengobatan penyakit dengan peralatan modern.
-                        </p>
-                        <a href="#" class="mt-6 inline-flex items-center text-[#4EA757] font-medium group">
-                            Pelajari lebih lanjut
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
+        <div class="mt-16">
+            <div class="grid gap-8 grid-cols-1 md:grid-cols-2 justify-center place-items-center">
+                <!-- Layanan 1 -->
+                <div class="bg-white rounded-xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#4EA757] w-full max-w-md">
+                    <div class="flex items-center justify-center h-14 w-14 rounded-xl bg-[#4EA757] text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
                     </div>
+                    <h3 class="mt-6 text-xl font-semibold text-gray-900">Grooming</h3>
+                    <p class="mt-4 text-base text-gray-600">
+                        Layanan grooming lengkap dengan produk alami untuk menjaga hewan peliharaan Anda bersih dan sehat.
+                    </p>
+                    <a href="/services" class="mt-6 inline-flex items-center text-[#4EA757] font-medium group">
+                        Pelajari lebih lanjut
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
 
-                    <!-- Layanan 2 -->
-                    <div class="bg-white rounded-xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#4EA757]">
-                        <div class="flex items-center justify-center h-14 w-14 rounded-xl bg-[#4EA757] text-white shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                            </svg>
-                        </div>
-                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Grooming</h3>
-                        <p class="mt-4 text-base text-gray-600">
-                            Layanan grooming lengkap dengan produk alami untuk menjaga hewan peliharaan Anda bersih dan sehat.
-                        </p>
-                        <a href="#" class="mt-6 inline-flex items-center text-[#4EA757] font-medium group">
-                            Pelajari lebih lanjut
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
+                <!-- Layanan 2 -->
+                <div class="bg-white rounded-xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#4EA757] w-full max-w-md">
+                    <div class="flex items-center justify-center h-14 w-14 rounded-xl bg-[#4EA757] text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                        </svg>
                     </div>
-
-                    <!-- Layanan 3 -->
-                    <div class="bg-white rounded-xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#4EA757]">
-                        <div class="flex items-center justify-center h-14 w-14 rounded-xl bg-[#4EA757] text-white shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                            </svg>
-                        </div>
-                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Penitipan</h3>
-                        <p class="mt-4 text-base text-gray-600">
-                            Fasilitas penitipan premium dengan pengawasan 24 jam dan area bermain yang luas.
-                        </p>
-                        <a href="#" class="mt-6 inline-flex items-center text-[#4EA757] font-medium group">
-                            Pelajari lebih lanjut
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
+                    <h3 class="mt-6 text-xl font-semibold text-gray-900">Penitipan</h3>
+                    <p class="mt-4 text-base text-gray-600">
+                        Fasilitas penitipan premium dengan pengawasan 24 jam dan area bermain yang luas.
+                    </p>
+                    <a href="/services" class="mt-6 inline-flex items-center text-[#4EA757] font-medium group">
+                        Pelajari lebih lanjut
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <!-- Artikel Blog Terbaru - Diperbaiki dengan card yang lebih konsisten -->
