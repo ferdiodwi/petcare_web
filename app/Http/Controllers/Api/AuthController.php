@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -81,7 +82,7 @@ class AuthController extends Controller
         }
 
         // DEBUG: Log password info
-        \Log::info('Login attempt:', [
+        Log::info('Login attempt:', [
             'email' => $request->email,
             'input_password' => $request->password,
             'stored_password' => $customer->password,

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class BoardingController extends Controller
 {
@@ -15,34 +16,48 @@ class BoardingController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $query = Boarding::query();
+        try {
+            $query = Boarding::query();
 
-        // Filter by status
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
+            // Filter by status
+            if ($request->has('status') && !empty($request->status)) {
+                $query->where('status', $request->status);
+            }
+
+            // Filter by date range
+            if ($request->has('start_date') && !empty($request->start_date)) {
+                $query->whereDate('start_date', '>=', $request->start_date);
+            }
+
+            if ($request->has('end_date') && !empty($request->end_date)) {
+                $query->whereDate('end_date', '<=', $request->end_date);
+            }
+
+            // Search by pet name or owner name
+            if ($request->has('search') && !empty($request->search)) {
+                $search = $request->search;
+                $query->where(function($q) use ($search) {
+                    $q->where('pet_name', 'like', "%{$search}%")
+                      ->orWhere('owner_name', 'like', "%{$search}%");
+                });
+            }
+
+            $boardings = $query->orderBy('created_at', 'desc')->paginate(10);
+
+            return response()->json([
+                'success' => true,
+                'data' => $boardings,
+                'message' => 'Data berhasil diambil'
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Error fetching boardings: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengambil data',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        // Filter by date range
-        if ($request->has('start_date')) {
-            $query->whereDate('start_date', '>=', $request->start_date);
-        }
-
-        if ($request->has('end_date')) {
-            $query->whereDate('end_date', '<=', $request->end_date);
-        }
-
-        // Search by pet name or owner name
-        if ($request->has('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('pet_name', 'like', "%{$search}%")
-                  ->orWhere('owner_name', 'like', "%{$search}%");
-            });
-        }
-
-        $boardings = $query->orderBy('created_at', 'desc')->paginate(10);
-
-        return response()->json($boardings);
     }
 
     /**
@@ -51,6 +66,8 @@ class BoardingController extends Controller
     public function store(Request $request): JsonResponse
     {
         try {
+            Log::info('Boarding store request received', $request->all());
+
             $validated = $request->validate([
                 'pet_name' => 'required|string|max:255',
                 'species' => 'required|in:Anjing,Kucing,Kelinci,Burung',
@@ -65,20 +82,37 @@ class BoardingController extends Controller
                 'services.*' => 'string|max:255'
             ]);
 
+            // Set default status
+            $validated['status'] = 'pending';
+
             $boarding = Boarding::create($validated);
+
+            // Calculate and save total cost
             $boarding->total_cost = $boarding->calculateTotalCost();
             $boarding->save();
 
+            Log::info('Boarding created successfully', ['id' => $boarding->id]);
+
             return response()->json([
+                'success' => true,
                 'message' => 'Data penitipan berhasil disimpan',
                 'data' => $boarding
             ], 201);
 
         } catch (ValidationException $e) {
+            Log::warning('Validation failed for boarding creation', $e->errors());
             return response()->json([
+                'success' => false,
                 'message' => 'Data tidak valid',
                 'errors' => $e->errors()
             ], 422);
+        } catch (\Exception $e) {
+            Log::error('Error creating boarding: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan data',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -87,7 +121,20 @@ class BoardingController extends Controller
      */
     public function show(Boarding $boarding): JsonResponse
     {
-        return response()->json($boarding);
+        try {
+            return response()->json([
+                'success' => true,
+                'data' => $boarding,
+                'message' => 'Data berhasil diambil'
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error fetching boarding: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengambil data',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -121,15 +168,24 @@ class BoardingController extends Controller
             }
 
             return response()->json([
+                'success' => true,
                 'message' => 'Data penitipan berhasil diupdate',
                 'data' => $boarding
             ]);
 
         } catch (ValidationException $e) {
             return response()->json([
+                'success' => false,
                 'message' => 'Data tidak valid',
                 'errors' => $e->errors()
             ], 422);
+        } catch (\Exception $e) {
+            Log::error('Error updating boarding: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengupdate data',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -138,11 +194,21 @@ class BoardingController extends Controller
      */
     public function destroy(Boarding $boarding): JsonResponse
     {
-        $boarding->delete();
+        try {
+            $boarding->delete();
 
-        return response()->json([
-            'message' => 'Data penitipan berhasil dihapus'
-        ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Data penitipan berhasil dihapus'
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error deleting boarding: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus data',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -150,20 +216,34 @@ class BoardingController extends Controller
      */
     public function statistics(): JsonResponse
     {
-        $stats = [
-            'total_boardings' => Boarding::count(),
-            'active_boardings' => Boarding::where('status', 'active')->count(),
-            'pending_boardings' => Boarding::where('status', 'pending')->count(),
-            'completed_boardings' => Boarding::where('status', 'completed')->count(),
-            'monthly_revenue' => Boarding::whereMonth('created_at', now()->month)
-                                      ->whereYear('created_at', now()->year)
-                                      ->sum('total_cost'),
-            'species_breakdown' => Boarding::selectRaw('species, COUNT(*) as count')
-                                         ->groupBy('species')
-                                         ->get()
-        ];
+        try {
+            $stats = [
+                'total_boardings' => Boarding::count(),
+                'active_boardings' => Boarding::where('status', 'active')->count(),
+                'pending_boardings' => Boarding::where('status', 'pending')->count(),
+                'completed_boardings' => Boarding::where('status', 'completed')->count(),
+                'cancelled_boardings' => Boarding::where('status', 'cancelled')->count(),
+                'monthly_revenue' => Boarding::whereMonth('created_at', now()->month)
+                                          ->whereYear('created_at', now()->year)
+                                          ->sum('total_cost'),
+                'species_breakdown' => Boarding::selectRaw('species, COUNT(*) as count')
+                                             ->groupBy('species')
+                                             ->get()
+            ];
 
-        return response()->json($stats);
+            return response()->json([
+                'success' => true,
+                'data' => $stats,
+                'message' => 'Statistik berhasil diambil'
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error fetching statistics: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengambil statistik',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -171,16 +251,32 @@ class BoardingController extends Controller
      */
     public function updateStatus(Request $request, Boarding $boarding): JsonResponse
     {
-        $validated = $request->validate([
-            'status' => 'required|in:pending,active,completed,cancelled',
-            'notes' => 'nullable|string|max:1000'
-        ]);
+        try {
+            $validated = $request->validate([
+                'status' => 'required|in:pending,active,completed,cancelled',
+                'notes' => 'nullable|string|max:1000'
+            ]);
 
-        $boarding->update($validated);
+            $boarding->update($validated);
 
-        return response()->json([
-            'message' => 'Status berhasil diupdate',
-            'data' => $boarding
-        ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Status berhasil diupdate',
+                'data' => $boarding
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak valid',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            Log::error('Error updating status: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengupdate status',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

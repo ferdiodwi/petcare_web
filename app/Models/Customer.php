@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage; // ✅ Tambahkan ini
 
 class Customer extends Model
 {
@@ -16,6 +17,7 @@ class Customer extends Model
         'phone',
         'address',
         'password',
+        'profile_image'
     ];
 
     // Hidden attributes untuk keamanan
@@ -32,5 +34,10 @@ class Customer extends Model
     public function getFullAddressAttribute()
     {
         return $this->address;
+    }
+
+    public function getProfileImageUrlAttribute()
+    {
+        return $this->profile_image ? Storage::url($this->profile_image) : null;
     }
 }
