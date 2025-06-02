@@ -17,6 +17,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -53,6 +54,22 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Orders') // Contoh grup lain yang Anda miliki (dari GroomingResource)
+                    ->icon('heroicon-o-shopping-cart'),
+
+                NavigationGroup::make()
+                    ->label('Bookings') // Contoh grup lain yang Anda miliki (dari GroomingResource)
+                    ->icon('heroicon-o-briefcase'), // Opsional: tambahkan ikon untuk grup
+
+                // Tambahkan grup lain yang Anda miliki di sini sesuai urutan yang diinginkan
+
+                NavigationGroup::make()
+                    ->label('Akun') // Grup "Akun" yang ingin ditaruh di bawah
+                    ->icon('heroicon-o-user-group'), // Opsional: ikon untuk grup "Akun"
             ]);
     }
 }

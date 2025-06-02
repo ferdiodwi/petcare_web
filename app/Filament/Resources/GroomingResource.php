@@ -15,14 +15,31 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope; // Jika menggunakan soft deletes
 use Filament\Tables\Actions\Action;
+use Filament\Notifications\Notification; // Pastikan ini di-import jika belum
 
 class GroomingResource extends Resource
 {
     protected static ?string $model = Grooming::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-scissors'; // Ganti dengan ikon yang sesuai
+    // protected static ?string $navigationIcon = 'heroicon-o-scissors'; // Ganti dengan ikon yang sesuai
 
     protected static ?string $navigationGroup = 'Bookings'; // Grup navigasi
+
+    // Method untuk menampilkan badge notifikasi di navigasi
+    public static function getNavigationBadge(): ?string
+    {
+        // Hitung jumlah grooming yang statusnya PENDING
+        $pendingCount = static::getModel()::where('status', GroomingStatus::PENDING)->count();
+
+        return $pendingCount > 0 ? (string) $pendingCount : null;
+    }
+
+    // Method opsional untuk memberi warna pada badge notifikasi
+    public static function getNavigationBadgeColor(): ?string
+    {
+        // Jika ada yang pending, beri warna 'warning' (kuning), jika tidak, tidak perlu warna khusus
+        return static::getModel()::where('status', GroomingStatus::PENDING)->count() > 0 ? 'warning' : null;
+    }
 
     public static function form(Form $form): Form
     {
@@ -123,55 +140,53 @@ class GroomingResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Action::make('confirm_booking')
-                    ->label('Confirm')
+                    ->label('Konfirmasi')
                     ->icon('heroicon-o-check-circle')
                     ->color('success')
                     ->action(function (Grooming $record) {
                         if ($record->status == GroomingStatus::PENDING) {
                             $record->status = GroomingStatus::CONFIRMED;
                             $record->save();
-                            // Anda bisa menambahkan notifikasi di sini jika perlu
-                            \Filament\Notifications\Notification::make()
+                            Notification::make() // Menggunakan import Filament\Notifications\Notification
                                 ->title('Booking Confirmed')
                                 ->success()
                                 ->send();
                         } else {
-                             \Filament\Notifications\Notification::make()
+                             Notification::make()
                                 ->title('Booking cannot be confirmed')
                                 ->body('This booking is not in pending state.')
                                 ->warning()
                                 ->send();
                         }
                     })
-                    ->visible(fn (Grooming $record): bool => $record->status == GroomingStatus::PENDING), // Hanya tampil jika status PENDING
+                    ->visible(fn (Grooming $record): bool => $record->status == GroomingStatus::PENDING),
 
                 Action::make('cancel_booking')
-                    ->label('Cancel')
+                    ->label('Batal')
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
-                    ->requiresConfirmation() // Meminta konfirmasi sebelum cancel
+                    ->requiresConfirmation()
                     ->action(function (Grooming $record) {
                         if ($record->status == GroomingStatus::PENDING || $record->status == GroomingStatus::CONFIRMED) {
                             $record->status = GroomingStatus::CANCELLED;
                             $record->save();
-                             \Filament\Notifications\Notification::make()
+                             Notification::make()
                                 ->title('Booking Cancelled')
                                 ->success()
                                 ->send();
                         } else {
-                             \Filament\Notifications\Notification::make()
+                             Notification::make()
                                 ->title('Booking cannot be cancelled')
                                 ->body('This booking is already cancelled or in an uncancelable state.')
                                 ->warning()
                                 ->send();
                         }
                     })
-                    ->visible(fn (Grooming $record): bool => $record->status == GroomingStatus::PENDING || $record->status == GroomingStatus::CONFIRMED), // Hanya tampil jika PENDING atau CONFIRMED
+                    ->visible(fn (Grooming $record): bool => $record->status == GroomingStatus::PENDING || $record->status == GroomingStatus::CONFIRMED),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                    // Anda bisa menambahkan bulk action untuk konfirmasi/cancel banyak booking sekaligus
                     Tables\Actions\BulkAction::make('confirm_selected')
                         ->label('Confirm Selected')
                         ->icon('heroicon-o-check-circle')
@@ -183,7 +198,7 @@ class GroomingResource extends Resource
                                     $record->save();
                                 }
                             });
-                            \Filament\Notifications\Notification::make()
+                            Notification::make()
                                 ->title('Selected bookings processed')
                                 ->body('Pending bookings have been confirmed.')
                                 ->success()
@@ -214,7 +229,6 @@ class GroomingResource extends Resource
         ];
     }
 
-    // Optional: Default sort by tanggal booking terbaru yang masih pending
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
