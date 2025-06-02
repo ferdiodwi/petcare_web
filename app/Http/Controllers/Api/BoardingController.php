@@ -76,10 +76,8 @@ class BoardingController extends Controller
                 'owner_email' => 'nullable|email|max:255',
                 'start_date' => 'required|date|after_or_equal:today',
                 'end_date' => 'required|date|after:start_date',
-                'special_instructions' => 'nullable|string|max:1000',
+                'notes' => 'nullable|string|max:1000',
                 'daily_rate' => 'required|numeric|min:0',
-                'services' => 'nullable|array',
-                'services.*' => 'string|max:255'
             ]);
 
             // Set default status

@@ -20,12 +20,10 @@ return new class extends Migration
             $table->string('owner_email')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->text('special_instructions')->nullable();
-            $table->enum('status', ['pending', 'active', 'completed', 'cancelled'])->default('pending');
+            $table->text('notes')->nullable();
+            $table->enum('status', ['pending', 'confirm', 'cancelled'])->default('pending');
             $table->decimal('daily_rate', 10, 2);
             $table->decimal('total_cost', 10, 2)->nullable();
-            $table->json('services')->nullable();
-            $table->text('notes')->nullable();
             $table->timestamps();
 
             // Indexes for better performance

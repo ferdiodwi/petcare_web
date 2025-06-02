@@ -18,12 +18,10 @@ class Boarding extends Model
         'owner_email',
         'start_date',
         'end_date',
-        'special_instructions',
+        'notes',
         'status',
         'daily_rate',
         'total_cost',
-        'services',
-        'notes'
     ];
 
     protected $casts = [
