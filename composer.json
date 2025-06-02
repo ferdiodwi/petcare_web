@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.3",
+        "flowframe/laravel-trend": "^0.4.0",
         "google/cloud-ai-platform": "^1.25",
         "intervention/image": "^3.11",
         "laravel/fortify": "^1.25",

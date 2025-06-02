@@ -38,8 +38,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class, // Removed
+                // Widgets\FilamentInfoWidget::class, // Removed
+                // The array is now empty, meaning no default global widgets are registered here.
+                // If you have other global widgets you want to keep, list them here.
             ])
             ->middleware([
                 EncryptCookies::class,
