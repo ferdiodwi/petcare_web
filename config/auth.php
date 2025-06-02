@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [ // Add this API guard
+            'driver' => 'sanctum', // Use 'sanctum' driver for Laravel Sanctum
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -66,8 +70,8 @@ return [
         ],
 
         // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        //      'driver' => 'database',
+        //      'table' => 'users',
         // ],
     ],
 

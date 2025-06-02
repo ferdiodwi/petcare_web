@@ -135,4 +135,14 @@ Route::get('/images/{filename}', [ProductController::class, 'serveImage']);
 Route::get('/debug/images', [ProductController::class, 'debugImages']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
+Route::get('/orders/customer/{id}', [OrderController::class, 'getCustomerOrders']);
 
+
+Route::middleware(['auth:api'])->group(function () {
+    // Order routes
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'getCustomerOrders']);
+        Route::get('/{orderId}', [OrderController::class, 'getOrderDetails']);
+        Route::put('/{orderId}/status', [OrderController::class, 'updateStatus']); // Admin only
+    });
+});
