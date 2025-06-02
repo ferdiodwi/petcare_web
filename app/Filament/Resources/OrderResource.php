@@ -93,11 +93,10 @@ class OrderResource extends Resource
                     ->label('Status Pesanan')
                     ->options([
                         'pending' => 'Pending',
-                        'paid' => 'Lunas',
-                        'processing' => 'Diproses',
-                        'shipped' => 'Dikirim',
-                        'completed' => 'Selesai',
-                        'cancelled' => 'Dibatalkan',
+                        'proses' => 'Diproses',
+                        'dikirim' => 'Dikirim',
+                        'selesai' => 'Selesai',
+                        'dibatalkan' => 'Dibatalkan',
                     ])
                     ->required(),
                 Forms\Components\FileUpload::make('payment_proof_path')
@@ -121,11 +120,10 @@ class OrderResource extends Resource
                     ->label('Status')
                     ->color(fn (string $state): string => match ($state) {
                         'pending' => 'warning',
-                        'paid' => 'success',
-                        'processing' => 'info',
-                        'shipped' => 'primary',
-                        'completed' => 'success',
-                        'cancelled' => 'danger',
+                        'proses' => 'info',
+                        'dikirim' => 'primary',
+                        'selesai' => 'success',
+                        'dibatalkan' => 'danger',
                         default => 'gray',
                     }),
                 Tables\Columns\ImageColumn::make('payment_proof_path')
