@@ -3,41 +3,47 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Storage; // ✅ Tambahkan ini
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
+        'full_name', // Jika ada field terpisah untuk nama lengkap
         'email',
+        'password',
         'phone',
         'address',
-        'password',
-        'profile_image'
+        // tambahkan field lain sesuai struktur table customers
     ];
 
-    // Hidden attributes untuk keamanan
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    public function orders(): HasMany
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Relasi ke orders
+     */
+    public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'customer_id');
     }
 
-    public function getFullAddressAttribute()
+    /**
+     * Get customer's full name
+     */
+    public function getFullNameAttribute()
     {
-        return $this->address;
-    }
-
-    public function getProfileImageUrlAttribute()
-    {
-        return $this->profile_image ? Storage::url($this->profile_image) : null;
+        return $this->full_name ?? $this->name ?? 'Unknown Customer';
     }
 }

@@ -6,19 +6,18 @@ enum OrderStatus: string
 {
     case PENDING = 'pending';
     case PROSES = 'proses';
-    case DIKIRIM = 'dikirim';
+    case SHIPPED = 'shipped';
     case SELESAI = 'selesai';
-    case DIBATALKAN = 'dibatalkan';
+    case CANCELED = 'canceled';
 
-    // Opsional: Anda bisa menambahkan method untuk mendapatkan label yang lebih ramah pengguna
     public function getLabel(): string
     {
         return match ($this) {
             self::PENDING => 'Pending',
-            self::PROSES => 'proses',
-            self::DIKIRIM => 'dikirim',
-            self::SELESAI => 'selesai',
-            self::DIBATALKAN => 'dibatalkan'
+            self::PROSES => 'Proses',
+            self::SHIPPED => 'Dikirim',
+            self::SELESAI => 'Selesai',
+            self::CANCELED => 'Dibatalkan',
         };
     }
 }

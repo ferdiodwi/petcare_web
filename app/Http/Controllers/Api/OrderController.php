@@ -35,14 +35,26 @@ class OrderController extends Controller
             // Urutkan berdasarkan tanggal terbaru
             $orders = $query->orderBy('created_at', 'desc')->get();
 
+            // Log untuk debugging
+            Log::info('Orders retrieved:', [
+                'count' => $orders->count(),
+                'orders' => $orders->map(function($order) {
+                    return [
+                        'id' => $order->id,
+                        'status' => $order->status,
+                        'status_type' => gettype($order->status)
+                    ];
+                })
+            ]);
+
             // Transform data untuk response
             $ordersData = $orders->map(function ($order) {
                 return [
                     'id' => $order->id,
                     'customer_name' => $order->customer_name,
                     'address' => $order->address,
-                    'total_amount' => $order->total_amount,
-                    'status' => $order->status,
+                    'total_amount' => (string) $order->total_amount, // Convert to string untuk konsistensi
+                    'status' => trim((string) $order->status), // Pastikan string dan trim whitespace
                     'payment_proof_path' => $order->payment_proof_path,
                     'created_at' => $order->created_at->toDateTimeString(),
                     'updated_at' => $order->updated_at->toDateTimeString(),
@@ -52,7 +64,7 @@ class OrderController extends Controller
                             'product_id' => $item->product_id,
                             'product_name' => $item->product->name ?? 'N/A',
                             'quantity' => $item->quantity,
-                            'price_at_purchase' => $item->price_at_purchase,
+                            'price_at_purchase' => (string) $item->price_at_purchase,
                         ];
                     }),
                 ];
