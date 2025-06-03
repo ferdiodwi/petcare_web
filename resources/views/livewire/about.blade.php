@@ -145,7 +145,7 @@
     </section>
 
     <!-- Team Section -->
-    <section class="py-16 bg-gray-50">
+    {{-- <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -179,7 +179,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Facilities -->
     <section class="py-16 bg-white">
@@ -276,9 +276,6 @@
                 <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
                     <a href="/services" class="px-8 py-4 border border-transparent text-base font-medium rounded-xl shadow-sm text-[#4EA757] bg-white hover:bg-[#f1f8f1] md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:-translate-y-1">
                         Lihat Layanan Kami
-                    </a>
-                    <a href="/contact" class="px-8 py-4 border border-white text-base font-medium rounded-xl shadow-sm text-white bg-transparent hover:bg-white hover:bg-opacity-10 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:-translate-y-1">
-                        Hubungi Kami
                     </a>
                 </div>
             </div>

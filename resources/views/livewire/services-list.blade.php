@@ -1,24 +1,23 @@
 <div class="min-h-screen bg-gray-50 font-sans">
     <!-- Hero Section -->
     <div class="relative bg-[#4EA757] overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-        <div class="relative z-10 pb-6 sm:pb-10 md:pb-12 lg:pb-12 xl:pb-8 bg-[#4EA757]">
-            <div class="pt-10 sm:pt-14 lg:pt-12 lg:pb-10">
-                <div class="mt-8 mx-auto max-w-7xl px-6 sm:mt-10 md:mt-12 lg:mt-14 xl:mt-20">
-                    <div class="text-center">
-                        <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                            <span class="block">Layanan Perawatan</span>
-                            <span class="block text-[#e8f5e9] mt-2">Hewan Peliharaan Terbaik</span>
-                        </h1>
-                        <p class="mt-5 text-lg text-[#e8f5e9] sm:text-xl md:mt-6 max-w-3xl mx-auto">
-                            Kami menyediakan layanan grooming dan boarding professional dengan standar tertinggi untuk kenyamanan hewan peliharaan Anda.
-                        </p>
-                    </div>
-                </div>
+        <div class="absolute inset-0">
+            <img class="w-full h-full object-cover opacity-20"
+            src="https://unsplash.com/photos/zo1GdaEKCvA/download?force=true"
+            alt="Pet care background">
+
+        </div>
+        <div class="relative max-w-7xl mx-auto py-24 px-6 sm:py-32 sm:px-8 lg:px-10">
+            <div class="text-center">
+                <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                    <span class="block animate-fade-in-down">Hewan Peliharaan Terbaik</span>
+                </h1>
+                <p class="mt-6 max-w-3xl text-xl text-[#e8f5e9] mx-auto">
+                    Kami menyediakan layanan grooming dan boarding professional dengan standar tertinggi untuk kenyamanan hewan peliharaan Anda.
+                </p>
             </div>
         </div>
     </div>
-</div>
 
 
     <!-- Services Grid -->
@@ -162,9 +161,6 @@
                                 </li>
                                 @endforeach
                             </ul>
-                            <button class="mt-4 w-full bg-[#4EA757] text-white py-2 px-4 rounded-lg hover:bg-[#3e8a4a] transition-colors">
-                                Pilih Paket Ini
-                            </button>
                         </div>
                         @endforeach
                     </div>
@@ -187,6 +183,40 @@
         </div>
     </div>
     @endif
+
+
+    <!-- CTA Section - Diperbaiki dengan desain yang lebih menarik -->
+    <div class="bg-gradient-to-r from-[#4EA757] to-[#3e8a4a] py-16">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    Layanan Service Hanya Tersedia di App Mobile
+                </h2>
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    Unduh Aplikasi Kami
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-[#e8f5e9] lg:mx-auto">
+                    Dapatkan akses mudah ke semua layanan dan informasi perawatan hewan
+                </p>
+            </div>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-6">
+                <a href="#" class="transition-transform hover:scale-105">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                    alt="Get it on Google Play"
+                    width="180"
+                    height="auto"
+                    class="rounded-lg shadow-lg">
+                </a>
+                <a href="#" class="transition-transform hover:scale-105">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                    alt="Download on the App Store"
+                    width="160"
+                    height="auto"
+                    class="rounded-lg shadow-lg">
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Testimonials -->
     <div class="py-16 bg-gray-50">

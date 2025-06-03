@@ -1,6 +1,11 @@
 <div class="min-h-screen bg-gray-50">
     <!-- Header Artikel -->
-    <div class="relative bg-[#4EA757] overflow-hidden">
+     <div class="relative bg-[#4EA757] overflow-hidden">
+        <div class="absolute inset-0">
+            <img class="w-full h-full object-cover opacity-10"
+                 src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+                 alt="Background pattern">
+        </div>
         <div class="max-w-7xl mx-auto py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-3xl tracking-tight font-extrabold text-white sm:text-4xl md:text-5xl">
@@ -133,7 +138,7 @@
     @endif
 
     <!-- Langganan Newsletter -->
-    <div class="bg-white py-12 border-t border-gray-200">
+    {{-- <div class="bg-white py-12 border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:text-center">
                 <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -155,5 +160,5 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>

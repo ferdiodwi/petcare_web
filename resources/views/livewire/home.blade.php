@@ -245,7 +245,7 @@
     </div>
 
     <!-- Ajakan Bertindak - Diperbaiki dengan desain yang lebih modern -->
-    <div class="relative bg-[#4EA757] overflow-hidden">
+    {{-- <div class="relative bg-[#4EA757] overflow-hidden">
         <div class="absolute inset-0">
             <img class="w-full h-full object-cover opacity-10" src="images/paw-pattern.png" alt="Pattern" loading="lazy">
         </div>
@@ -267,6 +267,6 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
